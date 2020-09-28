@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  before_action :authenticate_user
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   # GET /pictures
@@ -14,7 +15,11 @@ class PicturesController < ApplicationController
 
   # GET /pictures/new
   def new
-    @picture = Picture.new
+    if params[:back]
+      @picture = Picture.new(picture_params)
+    else
+      @picture = Picture.new
+    end
   end
 
   # GET /pictures/1/edit
@@ -25,14 +30,17 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = Picture.new(picture_params)
-
-    respond_to do |format|
-      if @picture.save
-        format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
-        format.json { render :show, status: :created, location: @picture }
-      else
-        format.html { render :new }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+    if params[:back]
+      render :new
+    else
+      respond_to do |format|
+        if @picture.save
+          format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
+          format.json { render :show, status: :created, location: @picture }
+        else
+          format.html { render :new }
+          format.json { render json: @picture.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -59,6 +67,10 @@ class PicturesController < ApplicationController
       format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  def confirm
+    @picture = Picture.new(picture_params)
+    render :new if @picture.invalid?
   end
 
   private
