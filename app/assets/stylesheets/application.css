@@ -39,6 +39,7 @@
     vertical-align: middle;
     text-align: center;
     font-family: fantasy;
+    text-decoration: none;
  }
  .square :hover {
    border-radius: 5px;
@@ -74,7 +75,6 @@ li {
   clear: both;
 }
 .container{
-  padding-bottom: 100px;
   min-width: 100%;
   margin: 0 auto;
   min-height: 100%;

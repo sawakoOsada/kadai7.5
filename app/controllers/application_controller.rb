@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   def authenticate_user
     unless logged_in?
       if @current_user == nil
@@ -7,7 +8,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   protect_from_forgery with: :exception
   include SessionsHelper
+  
 end
