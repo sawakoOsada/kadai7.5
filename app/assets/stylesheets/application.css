@@ -15,10 +15,14 @@
  *= require_self
  */
 
+ html {
+   width: 100%;
+ }
  body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
  }
  .square {
     width: 30px;
@@ -73,12 +77,14 @@ li {
   clear: both;
 }
 .container{
+  width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 .content_box{
   margin: auto;
+  padding-bottom: 50px;
 }
  footer {
    width: 100%;
